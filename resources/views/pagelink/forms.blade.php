@@ -1,151 +1,48 @@
 @include('pagelink.includes.header')
-    <div class="card card-info" style="margin-top: 60px;">
+<div class="card card-info" style="">
+    <form action="{{route('form.create',$button_id )}}" method="post">
+        @csrf
+        <div class="p-lg-2">
+            <input type="submit" class="btn btn-success" value="Save">
+            <input type="submit" class="btn btn-primary" value="New">
+        </div>
+        <br>
         <div class="card-header">
             <h3 class="card-title">{{ $title }}</h3>
+
         </div>
         <div class="card-body">
-            <form>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- text input -->
-                        <div class="form-group">
-                            <label>Text</label>
-                            <input type="text" class="form-control" placeholder="Enter ...">
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Text Disabled</label>
-                            <input type="text" class="form-control" placeholder="Enter ..." disabled>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- textarea -->
-                        <div class="form-group">
-                            <label>Textarea</label>
-                            <textarea class="form-control" rows="3" placeholder="Enter ..."></textarea>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Textarea Disabled</label>
-                            <textarea class="form-control" rows="3" placeholder="Enter ..." disabled></textarea>
-                        </div>
-                    </div>
-                </div>
 
-                <!-- input states -->
-                <div class="form-group">
-                    <label class="col-form-label" for="inputSuccess"><i class="fas fa-check"></i> Input with
-                        success</label>
-                    <input type="text" class="form-control is-valid" id="inputSuccess" placeholder="Enter ...">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label" for="inputWarning"><i class="far fa-bell"></i> Input with
-                        warning</label>
-                    <input type="text" class="form-control is-warning" id="inputWarning" placeholder="Enter ...">
-                </div>
-                <div class="form-group">
-                    <label class="col-form-label" for="inputError"><i class="far fa-times-circle"></i> Input with
-                        error</label>
-                    <input type="text" class="form-control is-invalid" id="inputError" placeholder="Enter ...">
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- checkbox -->
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox">
-                                <label class="form-check-label">Checkbox</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" checked>
-                                <label class="form-check-label">Checkbox checked</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" disabled>
-                                <label class="form-check-label">Checkbox disabled</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <!-- radio -->
-                        <div class="form-group">
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio1">
-                                <label class="form-check-label">Radio</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" name="radio1" checked>
-                                <label class="form-check-label">Radio checked</label>
-                            </div>
-                            <div class="form-check">
-                                <input class="form-check-input" type="radio" disabled>
-                                <label class="form-check-label">Radio disabled</label>
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <!-- text input -->
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" class="form-control" name="name" placeholder="Enter ...">
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- select -->
-                        <div class="form-group">
-                            <label>Select</label>
-                            <select class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Select Disabled</label>
-                            <select class="form-control" disabled>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                            </select>
-                        </div>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Mobile No.</label>
+                        <input type="number" min="0" name="mobile" class="form-control" placeholder="Enter ...">
                     </div>
                 </div>
-
-                <div class="row">
-                    <div class="col-sm-6">
-                        <!-- Select multiple-->
-                        <div class="form-group">
-                            <label>Select Multiple</label>
-                            <select multiple class="form-control">
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="form-group">
-                            <label>Select Multiple Disabled</label>
-                            <select multiple class="form-control" disabled>
-                                <option>option 1</option>
-                                <option>option 2</option>
-                                <option>option 3</option>
-                                <option>option 4</option>
-                                <option>option 5</option>
-                            </select>
-                        </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Address</label>
+                        <textarea class="form-control" name="address" rows="3" placeholder="Enter ..."></textarea>
                     </div>
                 </div>
-            </form>
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Remarks</label>
+                        <textarea class="form-control" rows="3" name="remarks" placeholder="Enter ..."></textarea>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </form>
+</div>
 @include('pagelink.includes.footer')

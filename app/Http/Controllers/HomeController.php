@@ -16,15 +16,20 @@ class HomeController extends Controller
         return view('auth.login');
     }
 
-    public function form()
+    public function form($id)
     {
-        $title = "New Form";
-        return view('pagelink.forms', compact('title'));
+        if ($id == 1) {
+            $title = "New Form";
+            $button_id = 1;
+        }
+
+        if ($id == 2) {
+            $title = "New anotherForm";
+            $button_id = 2;
+        }
+
+        return view('pagelink.forms', compact('title', 'button_id'));
     }
 
-    public function anotherForm()
-    {
-        $title = "New anotherForm";
-        return view('pagelink.anotherForm', compact('title'));
-    }
+
 }

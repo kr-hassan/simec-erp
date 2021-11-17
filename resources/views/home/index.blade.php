@@ -1,9 +1,8 @@
 @extends('master')
 @section('content')
     <div class="wrapper">
-        <!-- Content Wrapper. Contains page content -->
-        <div class="content-wrapper">
-            <iframe id="workplace" name="workplace" class="" src="" style="height:100%; background-color: #0b2e13" width="100%" frameborder="0"
+        <div class="content-wrapper" style="padding:5px;padding-top:65px;">
+            <iframe id="workplace" name="workplace" class="" src="" style="height:100%; border-radius:5px; background-color: #CCC" width="100%" frameborder="0"
                     scrolling="auto">
 
             </iframe>

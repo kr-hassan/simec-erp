@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CrudeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,11 +16,15 @@ use App\Http\Controllers\AuthController;
 |
 */
 //
+/*Route::get('/cache', function () {
+    Artisan::call('cache:clear');
 
-/*Auth Routes Start*/
+    return redirect()->back();
+})->name('cache');
+Auth Routes Start*/
 Route::get('/', [HomeController::class, 'login'])->name('login');
-Route::get('/form', [HomeController::class, 'form'])->name('form');
-Route::get('/anotherForm', [HomeController::class, 'anotherForm'])->name('anotherForm');
+Route::get('{id}/form', [HomeController::class, 'form'])->name('form');
+
 
 Route::post('login', [AuthController::class, 'login'])->name('custom.login');
 Route::get('register', [AuthController::class, 'registration'])->name('custom.registration');
@@ -31,6 +36,10 @@ Route::get('logout', [AuthController::class, 'logout'])->name('user.logout');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+
+    /*Menu Manager Routes*/
+    Route::get('/menu-manager', [CrudeController::class, 'view'])->name('viewMenuManager');
+    Route::post('/create', [CrudeController::class, 'insert'])->name('createMenuManager');
 
 });
 
