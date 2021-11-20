@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CrudeController;
+use App\Http\Controllers\MenuManagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,6 @@ use App\Http\Controllers\CrudeController;
 })->name('cache');
 Auth Routes Start*/
 Route::get('/', [HomeController::class, 'login'])->name('login');
-Route::get('{id}/form', [HomeController::class, 'form'])->name('form');
-
-
 Route::post('login', [AuthController::class, 'login'])->name('custom.login');
 Route::get('register', [AuthController::class, 'registration'])->name('custom.registration');
 Route::post('user-register', [AuthController::class, 'userRegistration'])->name('user.registration');
@@ -35,11 +33,28 @@ Route::get('logout', [AuthController::class, 'logout'])->name('user.logout');
 /*Dashboard Routes*/
 
 Route::group(['middleware' => 'auth'], function () {
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+	Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
-    /*Menu Manager Routes*/
-    Route::get('/menu-manager', [CrudeController::class, 'view'])->name('viewMenuManager');
-    Route::post('/create', [CrudeController::class, 'insert'])->name('createMenuManager');
+	/*Auto Routes*/
+//    Route::get('{btnid}/form', [HomeController::class, 'form'])->name('form');
+//    Route::post('/form/create', [HomeController::class, 'form.create'])->name('form.create');
+//    Route::get('{btnid}/form/edit', [HomeController::class, 'form.edit'])->name('form.edit');
+//    Route::get('/form/update', [HomeController::class, 'form.update'])->name('form.uUpdate');
+//    Route::get('/form/delete', [HomeController::class, 'form.delete'])->name('form.delete');
+
+    /*Routes*/
+    Route::get('form', [HomeController::class, 'form'])->name('form');
+    Route::post('form/create', [HomeController::class, 'form.create'])->name('form.create');
+    Route::get('form/edit', [HomeController::class, 'form.edit'])->name('form.edit');
+    Route::get('/form/update', [HomeController::class, 'form.update'])->name('form.uUpdate');
+    Route::get('/form/delete', [HomeController::class, 'form.delete'])->name('form.delete');
+
+
+	/*Menu Manager Routes*/
+    Route::get('/menu-manager', [MenuManagerController::class, 'index'])->name('viewMenuManager');
+    Route::get('/create', [MenuManagerController::class, 'create'])->name('createMenuPage');
+    Route::post('/create', [MenuManagerController::class, 'insert'])->name('saveMenuPage');
+
 
 });
 

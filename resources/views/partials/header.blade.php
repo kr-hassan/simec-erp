@@ -47,5 +47,5 @@
 
 <body class="hold-transition sidebar-mini layout-fixed">
 
-@include('partials.preloader')
+{{--@include('partials.preloader')--}}
 @include('partials.navbar')

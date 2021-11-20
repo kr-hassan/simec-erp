@@ -1,13 +1,8 @@
 @php
-    @$public_path = "../";
-
 if (config('myconfig.production')) {
-    $public_path = "../public/";
+    if(@$public_path=="../"){@$public_path="../public/";}
+    else{@$public_path="public/";}
 }
-else{
-     $public_path = "../";
-}
-
 @endphp
 
 <link rel="stylesheet"

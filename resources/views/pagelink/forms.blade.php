@@ -1,6 +1,7 @@
+@php @$public_path = "../"; @endphp
 @include('pagelink.includes.header')
 <div class="card card-info" style="">
-    <form action="{{route('form.create',$button_id )}}" method="post">
+    <form action="{{route('form.create')}}" method="post">
         @csrf
         <div class="p-lg-2">
             <input type="submit" class="btn btn-success" value="Save">
@@ -9,7 +10,6 @@
         <br>
         <div class="card-header">
             <h3 class="card-title">{{ $title }}</h3>
-
         </div>
         <div class="card-body">
 
