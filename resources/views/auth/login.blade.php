@@ -9,11 +9,11 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="../../plugins/fontawesome-free/css/all.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/fontawesome-free/css/all.min.css')}}">
     <!-- icheck bootstrap -->
-    <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
-    <link rel="stylesheet" href="../../dist/css/adminlte.min.css">
+    <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
 </head>
 <body class="hold-transition login-page">
 <div class="login-box">
@@ -60,12 +60,12 @@
                 </div>
             </form>
 
-{{--            <p class="mb-1">--}}
-{{--                <a href="">I forgot my password</a>--}}
-{{--            </p>--}}
-{{--            <p class="mb-0">--}}
-{{--                <a href="{{route('custom.registration')}}" class="text-center">Register a new membership</a>--}}
-{{--            </p>--}}
+            {{--            <p class="mb-1">--}}
+            {{--                <a href="">I forgot my password</a>--}}
+            {{--            </p>--}}
+            {{--            <p class="mb-0">--}}
+            {{--                <a href="{{route('custom.registration')}}" class="text-center">Register a new membership</a>--}}
+            {{--            </p>--}}
         </div>
     </div>
 </div>
@@ -80,13 +80,31 @@
         }
 
     }
+    window.onload = function () {
+        if (typeof history.pushState === "function") {
+            history.pushState("jibberish", null, null);
+            window.onpopstate = function () {
+                history.pushState('newjibberish', null, null);
+            };
+        } else {
+            var ignoreHashChange = true;
+            window.onhashchange = function () {
+                if (!ignoreHashChange) {
+                    ignoreHashChange = true;
+                    window.location.hash = Math.random();
+                } else {
+                    ignoreHashChange = false;
+                }
+            };
+        }
+    }
 </script>
 
 <!-- jQuery -->
-<script src="../../plugins/jquery/jquery.min.js"></script>
+<script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
-<script src="../../plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- AdminLTE App -->
-<script src="../../dist/js/adminlte.min.js"></script>
+<script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>
