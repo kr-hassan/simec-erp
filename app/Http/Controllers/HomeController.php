@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
+    public $menuManager;
+
+    public function __construct()
+    {
+        $this->menuManager = new MenuManager();
+    }
+
     public function index()
     {
-        $menus = MenuManager::with('childs')->whereNull('parent_id')->whereStatus(1)->get();
-
-//        $all_menus =MenuManager::where('parent_id', 0)->with('')->get();
-        return view('home.index', compact('menus'));
+        return view('home.index');
     }
 
     public function login()

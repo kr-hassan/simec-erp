@@ -27,10 +27,24 @@
                         <tr>
                             <th scope="row">{{ $loop->iteration }}</th>
                             <td>{{ $menu->title }}</td>
-                            <td>{{ $menu['parent_id'] == '' ? $menu['title'] : $menus->where('id', $menu['parent_id'])->first()->title  }}</td>
+                            <td>{{ $menu->parent_id == '' ? $menu->title : $menus->where('id', $menu['parent_id'])->first()->title  }}</td>
                             <td>{{ $menu->index  }}</td>
                             <td>{{$menu->url }}</td>
-                            <td>Action</td>
+                            <td>
+                                <form action="{{ route('editMenuPage') }}" method="POST">
+                                    @CSRF
+{{--                                    <button class=""  data-id="">--}}
+                                        {{--<a  href="{{route('editMenuPage',$menu->id )}}" class="pr-1 pl-1 rounded badge-info" data-toggle="tooltip"
+                                            data-placement="top" title="Edit">--}}
+                                    <input type="hidden" name="id" value="{{ $menu->id }}" />
+                                    <button type="submit" class="btn btn-sm btn-info">
+                                        <i class="fas fa-edit" title="Edit"></i>
+                                    </button>
+
+                                    {{--</a>--}}
+{{--                                    </button>--}}
+                                </form>
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>

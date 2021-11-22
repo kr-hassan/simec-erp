@@ -42,6 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
 //    Route::get('/form/update', [HomeController::class, 'form.update'])->name('form.uUpdate');
 //    Route::get('/form/delete', [HomeController::class, 'form.delete'])->name('form.delete');
 
+//    Route::post('/edit', [MenuManagerController::class, 'edit'])->name('editMenuPage');
+
     /*Routes*/
     Route::get('form', [HomeController::class, 'form'])->name('form');
     Route::post('form/create', [HomeController::class, 'form.create'])->name('form.create');
@@ -54,6 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/menu-manager', [MenuManagerController::class, 'index'])->name('viewMenuManager');
     Route::get('/create', [MenuManagerController::class, 'create'])->name('createMenuPage');
     Route::post('/create', [MenuManagerController::class, 'insert'])->name('saveMenuPage');
+    Route::get('/edit/{id}', [MenuManagerController::class, 'edit'])->name('editMenuPage');
+    Route::post('/update/{id}', [MenuManagerController::class, 'update'])->name('updateMenuPage');
 
 
 });

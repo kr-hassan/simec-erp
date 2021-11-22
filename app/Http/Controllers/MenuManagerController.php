@@ -7,29 +7,42 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-use function GuzzleHttp\Promise\all;
 
 class MenuManagerController extends Controller
 {
+    public $menuManager = null;
+
+    public function __construct()
+    {
+        $this->menuManager = new MenuManager();
+    }
+
     public function index()
     {
-        $menus = MenuManager::with('childs')->whereStatus(1)->get();
-        return view('pagelink.setting.menu.index', compact('menus'));
-
+        $menus = $this->menuManager->allData();
+        return view('setting.menu.index', compact('menus'));
     }
+
     public function create()
     {
-        $menus = MenuManager::whereStatus(1)->get();
-        return view('pagelink.setting.menu.create', compact('menus'));
-
+        $menus = $this->menuManager->allData();
+        return view('setting.menu.create', compact('menus'));
     }
+
+    /*    public function edit(Request $request)
+        {
+            $id = (int)$request->id;
+            $menus = $this->menu->all_menu();
+            $menu = $this->menu->find_data($id);
+            return view('setting.menu.edit', compact('menu', 'menus'));
+
+        }*/
 
     public function insert(Request $request)
     {
 
         $this->validate($request, [
             'title' => 'required|min:3|max:255',
-            'type' => 'required',
             'status' => 'required',
         ]);
 
@@ -38,21 +51,43 @@ class MenuManagerController extends Controller
             'title' => $request->title,
             'parent_id' => $request->parent_id,
             'url' => $request->url,
-            'type' => $request->type,
             'status' => $request->status,
             'creator_id' => Auth::user()->id,
         ];
 
-        MenuManager::create($data);
+        $menuManage = $this->menuManager->create_menu($data);
         Session::flash('success', "Created successfully");
         return Redirect::back();
     }
 
-    public function list()
+    public function edit($id)
     {
-        $menus = MenuManager::whereStatus(1)->get();
-        return view('pagelink.setting.menu.index', compact('menus'));
+        $menus = $this->menuManager->allData();
+        $single_menu = $this->menuManager->find($id);
+
+        return view('setting.menu.edit', compact('single_menu', 'menus'));
 
     }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request, [
+            'title' => 'required|min:3|max:255',
+            'status' => 'required',
+        ]);
+
+        $data = [
+            'index' => $request->index,
+            'title' => $request->title,
+            'parent_id' => $request->parent_id,
+            'url' => $request->url,
+            'status' => $request->status,
+            'creator_id' => Auth::user()->id,
+        ];
+        $updateMenu = $this->menuManager->menuUpdate($id, $data);
+        Session::flash('success', "Updated successfully");
+        return redirect()->route('viewMenuManager');
+    }
+
 
 }

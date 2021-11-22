@@ -1,7 +1,7 @@
 <div id="successMessage">
 
     @if(Session::has('success'))
-        <div class="alert alert-success alert-dismissible" style="background: rgba(76, 175, 80, 0.3); color: #0b2e13">
+        <div class="alert alert-success">
             {{ Session::get('success') }}
         </div>
     @endif

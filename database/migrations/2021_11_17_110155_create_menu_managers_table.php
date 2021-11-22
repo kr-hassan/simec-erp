@@ -23,6 +23,7 @@ class CreateMenuManagersTable extends Migration
             $table->integer('parent_id')->nullable();
             $table->string('title', 191);
             $table->string('url', 191)->nullable();
+            $table->text('permission')->nullable();
             $table->integer('status')->default('1')->comment('1 = Active & 0= Inactive');
             $table->timestamps();
             $table->softDeletes();

@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\MenuManager;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +25,14 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Schema::defaultStringLength(191);
+         Schema::defaultStringLength(191);
+
+        view()->composer('partials.sidebar', function ($view) {
+            $menus = MenuManager::whereNull('parent_id')->with('childs', function($query){
+                $query->where('status', 1);
+            })->where('status', 1)->get();
+
+            $view->with('menus', $menus);
+        });
     }
 }
