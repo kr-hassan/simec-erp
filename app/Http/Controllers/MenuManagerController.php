@@ -40,24 +40,30 @@ class MenuManagerController extends Controller
 
     public function insert(Request $request)
     {
+        try {
+            $this->validate($request, [
+                'title' => 'required|min:3|max:255',
+                'status' => 'required',
+            ]);
+            $data = [
+                'index' => $request->index,
+                'title' => $request->title,
+                'parent_id' => $request->parent_id,
+                'url' => $request->url,
+                'status' => $request->status,
+                'creator_id' => Auth::user()->id,
+            ];
 
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-            'status' => 'required',
-        ]);
+            $menuManage = $this->menuManager->create_menu($data);
+            Session::flash('success', "Created successfully");
+            return Redirect::back();
 
-        $data = [
-            'index' => $request->index,
-            'title' => $request->title,
-            'parent_id' => $request->parent_id,
-            'url' => $request->url,
-            'status' => $request->status,
-            'creator_id' => Auth::user()->id,
-        ];
+        } catch (\Throwable $th) {
+            return redirect()->back()->with(['error' => 'Some Validation Error Occurred!']);
 
-        $menuManage = $this->menuManager->create_menu($data);
-        Session::flash('success', "Created successfully");
-        return Redirect::back();
+        }
+
+
     }
 
     public function edit($id)
@@ -71,22 +77,29 @@ class MenuManagerController extends Controller
 
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
-            'title' => 'required|min:3|max:255',
-            'status' => 'required',
-        ]);
+        try{
+            $this->validate($request, [
+                'title' => 'required|min:3|max:255',
+                'status' => 'required',
+            ]);
 
-        $data = [
-            'index' => $request->index,
-            'title' => $request->title,
-            'parent_id' => $request->parent_id,
-            'url' => $request->url,
-            'status' => $request->status,
-            'creator_id' => Auth::user()->id,
-        ];
-        $updateMenu = $this->menuManager->menuUpdate($id, $data);
-        Session::flash('success', "Updated successfully");
-        return redirect()->route('viewMenuManager');
+            $data = [
+                'index' => $request->index,
+                'title' => $request->title,
+                'parent_id' => $request->parent_id,
+                'url' => $request->url,
+                'status' => $request->status,
+                'creator_id' => Auth::user()->id,
+            ];
+            $updateMenu = $this->menuManager->menuUpdate($id, $data);
+            Session::flash('success', "Updated successfully");
+            return redirect()->route('viewMenuManager');
+
+        }
+        catch (\Throwable $th){
+            return redirect()->back()->with(['error' => 'Some Validation Error Occurred!']);
+        }
+
     }
 
 
