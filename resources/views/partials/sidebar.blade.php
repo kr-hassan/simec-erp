@@ -12,7 +12,7 @@
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 @foreach($menus as $menu)
                     <li class="nav-item">
-                        <a href="{{route($menu->url)}}" class="nav-link active">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-circle"></i>
                             <p>
                                 {{ $menu->title ?? '' }}
@@ -21,57 +21,9 @@
                                 @endif
                             </p>
                         </a>
-{{--                        {{dd($menu->childs)}}--}}
-
                         @if($menu->childs->count()>0)
-                            <ul class="nav nav-treeview">
-                                @foreach($menu->childs as $subMenu)
-                                    <li class="nav-item">
-                                        <a href="{{ route($subMenu->url) }}" class="nav-link active">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{$subMenu->title ?? ''}}</p>
-                                        </a>
-                                    </li>
-                                @endforeach
-                            </ul>
+                            @include('partials.manage_chaild_menu', ['childs' => $menu->childs])
                         @endif
-
-
-
-
-
-
-{{--                        @if($menu->childs->count()>0)
-                            <ul class="nav nav-treeview">
-                                @foreach($menu->childs as $subMenu)
-                                    <li class="nav-item">
-                                        <a href="javascript:void(0);" class="nav-link active"
-                                           onclick="document.getElementById('workplace').src='{{route($subMenu->url)}}';">
-                                            <i class="far fa-circle nav-icon"></i>
-                                            <p>{{$subMenu->title ?? ''}}</p>
---}}{{--                                            @if($menu->childs->count()>0)--}}{{--
---}}{{--                                                <i class="right fas fa-angle-left"></i>--}}{{--
---}}{{--                                            @endif--}}{{--
-                                        </a>
---}}{{--                                        @if($menu->childs->count()>0)--}}{{--
---}}{{--                                            <ul class="nav nav-treeview">--}}{{--
---}}{{--                                                <li class="nav-item">--}}{{--
---}}{{--                                                <li class="nav-item">--}}{{--
---}}{{--                                                    <a href="javascript:void(0);" class="nav-link active"--}}{{--
---}}{{--                                                       onclick="document.getElementById('workplace').src='{{route($subMenu->url)}}';">--}}{{--
---}}{{--                                                        <i class="far fa-circle nav-icon"></i>--}}{{--
---}}{{--                                                        <p>{{$subMenu->title ?? ''}}</p>--}}{{--
---}}{{--                                                        @if($menu->childs->count()>0)--}}{{--
---}}{{--                                                            <i class="right fas fa-angle-left"></i>--}}{{--
---}}{{--                                                        @endif--}}{{--
---}}{{--                                                    </a>--}}{{--
---}}{{--                                                </li>--}}{{--
---}}{{--                                            </ul>--}}{{--
---}}{{--                                        @endif--}}{{--
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif--}}
                     </li>
                 @endforeach
             </ul>

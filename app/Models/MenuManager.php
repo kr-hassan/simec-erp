@@ -15,7 +15,7 @@ class MenuManager extends Model
 
     public function childs()
     {
-        return $this->hasMany(MenuManager::class, 'parent_id');
+        return $this->hasMany(MenuManager::class, 'parent_id', 'id');
     }
 
 //    public function findMenu($id)

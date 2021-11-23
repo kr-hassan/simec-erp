@@ -24,6 +24,7 @@
                                     <th scope="col">Parent</th>
                                     <th scope="col">Index</th>
                                     <th scope="col">Url</th>
+                                    <th scope="col">Status</th>
                                     <th scope="col">Action</th>
                                 </tr>
                                 </thead>
@@ -35,6 +36,7 @@
                                         <td>{{ $menu->parent_id == '' ? $menu->title : $menus->where('id', $menu['parent_id'])->first()->title  }}</td>
                                         <td>{{ $menu->index  }}</td>
                                         <td>{{$menu->url }}</td>
+                                        <td>{{$menu->status===0 ? 'Inactive' : 'Active' }}</td>
                                         <td>
                                             <button class="" data-id="">
                                                 <a href="{{route('editMenuPage',$menu->id )}}" class="pr-1 pl-1 rounded badge-info"
@@ -42,6 +44,16 @@
                                                    data-placement="top" title="Edit">
                                                     <i class="fas fa-edit"></i></a>
                                             </button>
+
+                                            @if ($menu->status == 1)
+                                                <a href="{{ route('inactiveMenuPage', $menu->id) }}"
+                                                   class="pr-1 pl-1 rounded badge-danger" data-toggle="tooltip"
+                                                   data-placement="top" title="Inactive"><i class="fas fa-times"></i></a>
+                                            @else
+                                                <a href="{{ route('activeMenuPage', $menu->id) }}"
+                                                   class="pr-1 pl-1 rounded badge-success" data-toggle="tooltip"
+                                                   data-placement="top" title="Active"><i class="fas fa-check"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach

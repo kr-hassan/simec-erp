@@ -33,9 +33,9 @@ Route::get('logout', [AuthController::class, 'logout'])->name('user.logout');
 /*Dashboard Routes*/
 
 Route::group(['middleware' => 'auth'], function () {
-	Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('home');
 
-	/*Auto Routes*/
+    /*Auto Routes*/
 //    Route::get('{btnid}/form', [HomeController::class, 'form'])->name('form');
 //    Route::post('/form/create', [HomeController::class, 'form.create'])->name('form.create');
 //    Route::get('{btnid}/form/edit', [HomeController::class, 'form.edit'])->name('form.edit');
@@ -52,12 +52,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/form/delete', [HomeController::class, 'form.delete'])->name('form.delete');
 
 
-	/*Menu Manager Routes*/
+    /*Menu Manager Routes*/
     Route::get('/menu-manager', [MenuManagerController::class, 'index'])->name('viewMenuManager');
     Route::get('/create', [MenuManagerController::class, 'create'])->name('createMenuPage');
     Route::post('/create', [MenuManagerController::class, 'insert'])->name('saveMenuPage');
     Route::get('/edit/{id}', [MenuManagerController::class, 'edit'])->name('editMenuPage');
     Route::post('/update/{id}', [MenuManagerController::class, 'update'])->name('updateMenuPage');
+    Route::get('/menu-active/{id}', [MenuManagerController::class, 'active'])->name('activeMenuPage');
+    Route::get('/menu-inactive/{id}', [MenuManagerController::class, 'inactive'])->name('inactiveMenuPage');
+
+    /*User Create*/
+    Route::get('/user-create')->name('');
 
 
 });

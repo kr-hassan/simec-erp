@@ -77,7 +77,7 @@ class MenuManagerController extends Controller
 
     public function update(Request $request, $id)
     {
-        try{
+        try {
             $this->validate($request, [
                 'title' => 'required|min:3|max:255',
                 'status' => 'required',
@@ -95,11 +95,32 @@ class MenuManagerController extends Controller
             Session::flash('success', "Updated successfully");
             return redirect()->route('viewMenuManager');
 
-        }
-        catch (\Throwable $th){
+        } catch (\Throwable $th) {
             return redirect()->back()->with(['error' => 'Some Validation Error Occurred!']);
         }
 
+    }
+
+    public function active($id)
+    {
+        $data = [
+            'status' => 1,
+
+        ];
+        $updateMenuStatus = $this->menuManager->menuUpdate($id, $data);
+        Session::flash('success', "Updated successfully");
+        return redirect()->route('viewMenuManager');
+    }
+
+    public function inactive($id)
+    {
+        $data = [
+            'status' => 0,
+
+        ];
+        $updateMenuStatus = $this->menuManager->menuUpdate($id, $data);
+        Session::flash('success', "Updated successfully");
+        return redirect()->route('viewMenuManager');
     }
 
 

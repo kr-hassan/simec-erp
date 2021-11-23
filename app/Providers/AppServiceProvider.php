@@ -29,8 +29,9 @@ class AppServiceProvider extends ServiceProvider
 
         view()->composer('partials.sidebar', function ($view) {
             $menus = MenuManager::whereNull('parent_id')->with('childs', function($query){
-                $query->where('status', 1);
+                $query->with('childs')->where('status', 1);
             })->where('status', 1)->get();
+//            ddd($menus);
 
             $view->with('menus', $menus);
         });
