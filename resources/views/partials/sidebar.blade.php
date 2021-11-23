@@ -9,10 +9,10 @@
     <!-- Sidebar -->
     <div class="sidebar">
         <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
                 @foreach($menus as $menu)
                     <li class="nav-item">
-                        <a href="#" class="nav-link">
+                        <a href="{{route($menu->url)}}" class="nav-link">
                             <i class="nav-icon fas fa-circle"></i>
                             <p>
                                 {{ $menu->title ?? '' }}

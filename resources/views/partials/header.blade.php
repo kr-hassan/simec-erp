@@ -48,5 +48,5 @@
 <body class="hold-transition sidebar-mini layout-fixed">
 <div class="wrapper">
 {{--@include('partials.preloader')--}}
-{{--@include('partials.navbar')    <!-- Content Wrapper. Contains page content -->--}}
+@include('partials.navbar')    <!-- Content Wrapper. Contains page content -->
     <div class="content-wrapper">

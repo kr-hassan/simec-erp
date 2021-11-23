@@ -54,6 +54,12 @@ class AuthController extends Controller
 
     }
 
+    public function userList()
+    {
+        $users= User::select('name', 'email')->get();
+        return view('auth.userlist', compact('users'));
+    }
+
     public function logout(Request $request)
     {
         Session::flush();

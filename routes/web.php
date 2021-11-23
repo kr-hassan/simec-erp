@@ -27,6 +27,7 @@ Route::get('/', [HomeController::class, 'login'])->name('login');
 Route::post('login', [AuthController::class, 'login'])->name('custom.login');
 Route::get('register', [AuthController::class, 'registration'])->name('custom.registration');
 Route::post('user-register', [AuthController::class, 'userRegistration'])->name('user.registration');
+Route::post('user-list', [AuthController::class, 'userList'])->name('user.list');
 Route::get('logout', [AuthController::class, 'logout'])->name('user.logout');
 /*Auth Routes End*/
 
@@ -62,7 +63,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/menu-inactive/{id}', [MenuManagerController::class, 'inactive'])->name('inactiveMenuPage');
 
     /*User Create*/
-    Route::get('/user-create')->name('');
+//    Route::get('/user-create', [AuthController::class, 'userRegistration'])->name('');
 
 
 });
